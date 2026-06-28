@@ -1,10 +1,10 @@
-# Graphwar II 折线工具
+# Graphwar 折线工具
 
-一个用于 Graphwar II 的 Python/Tkinter 小工具。它通过屏幕点选路径点，生成可复制到游戏中的 `abs(...)` 折线函数表达式。
+一个用于 Graphwar / Graphwar II 的 Python/Tkinter 小工具。它通过屏幕点选路径点，生成可复制到游戏中的折线函数表达式。
 
 ## 功能
 
-- 框选 Graphwar II 白色作图区并保存校准结果。
+- 框选 Graphwar 白色作图区并保存校准结果。
 - 在全屏半透明覆盖层中连续点击路径点。
 - 将屏幕坐标映射到游戏坐标范围：
   - `x`: `[-25, 25]`
@@ -21,16 +21,10 @@
 
 ## 运行
 
-在项目目录执行：
+在目录执行：
 
 ```powershell
 python .\graphwar_polyline_tool.py
-```
-
-也可以使用完整路径运行：
-
-```powershell
-python D:\Projects\GraphwarPolylineTool\graphwar_polyline_tool.py
 ```
 
 ## 使用流程
@@ -38,10 +32,10 @@ python D:\Projects\GraphwarPolylineTool\graphwar_polyline_tool.py
 1. 打开 Graphwar II，并让白色作图区可见。
 2. 运行本工具。
 3. 点击 `框选作图区`。
-4. 在覆盖层中依次点击白色作图区的左上角和右下角。
-5. 点击 `添加点`，在游戏画面上连续点选折线路径。
-6. 按 `Esc` 结束点选，工具会生成函数并复制到剪贴板。
-7. 将剪贴板内容粘贴到 Graphwar II 中使用。
+4. 在覆盖层中依次点击白色作图区的左上角和右下角，或右上角和左下角。按 `Esc` 退出
+5. 点击 `添加点` 或 `清空并添加点`，在游戏画面上连续点选折线路径。
+6. 按 `Esc` 结束点选，工具会自动生成函数并复制到剪贴板。
+7. 将剪贴板内容粘贴到 Graphwar 中使用。
 
 ## 界面按钮
 
@@ -59,10 +53,10 @@ python D:\Projects\GraphwarPolylineTool\graphwar_polyline_tool.py
 工具会先按横坐标从小到大排序点，再生成由绝对值函数拼接的折线表达式。例如多个路径点会被转换为类似下面的形式：
 
 ```text
-y0+a*(abs(x-x1)-abs(x-x2)+d)+...
+y0+a*(abs(x-x1)-abs(x-x2)+x2-x1)+...
 ```
 
-如果存在相同横坐标但纵坐标不同的点，无法表示为普通函数，工具会提示错误。
+如果存在相同横坐标但纵坐标不同的点，无法表示为函数，工具会提示错误。
 
 ## 生成文件
 
@@ -73,14 +67,6 @@ graphwar_polyline_calibration.json
 ```
 
 该文件保存作图区校准坐标。删除它或点击 `重置校准` 后需要重新框选作图区。
-
-## 验证
-
-当前项目没有测试文件。可用下面的命令做语法检查：
-
-```powershell
-python -B -m py_compile .\graphwar_polyline_tool.py
-```
 
 ## 注意事项
 
