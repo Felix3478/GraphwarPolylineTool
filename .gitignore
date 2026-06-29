@@ -221,3 +221,4 @@ __marimo__/
 
 # GraphwarPolylineTool local data
 graphwar_polyline_calibration.json
+test_graphwar_polyline_tool.py

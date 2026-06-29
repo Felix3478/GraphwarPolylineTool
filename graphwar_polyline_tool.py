@@ -56,6 +56,12 @@ def game_to_screen(x: float, y: float, box: CalibrationBox) -> tuple[float, floa
     return px, py
 
 
+def vertical_line_for_point(point: tuple[float, float], box: CalibrationBox) -> tuple[float, float, float, float]:
+    box = box.normalized()
+    px, _py = game_to_screen(point[0], point[1], box)
+    return px, box.top, px, box.bottom
+
+
 def points_to_polyline(points: list[tuple[float, float]]) -> str:
     if not points:
         raise PolylineError("至少需要一个点。")
@@ -197,6 +203,12 @@ class ClickOverlay:
 
         for index, point in enumerate(self.points, start=1):
             px, py = game_to_screen(point[0], point[1], box)
+            self.canvas.create_line(
+                *vertical_line_for_point(point, box),
+                fill=OVERLAY_PATH_COLOR,
+                width=1,
+                tags=("geometry",),
+            )
             self.canvas.create_oval(
                 px - 4,
                 py - 4,
